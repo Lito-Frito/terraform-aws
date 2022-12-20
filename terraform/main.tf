@@ -9,7 +9,7 @@ resource "aws_vpc" "development-vpc" {
 }
 
 resource "aws_subnet" "dev-subnet-1" {
-  vpc_id = aws_vpc.development-vpc.id
-  cidr_block = "10.0.10.0/24"
-  availability_zone = "us-west-1a"
+  vpc_id            = aws_vpc.development-vpc.id
+  cidr_block        = "10.0.10.0/24"
+  availability_zone = "us-west-1b"
 }
