@@ -20,7 +20,7 @@ variable "subnet_cidr_block_dev_1" {
 
 variable "subnet_cidr_block_dev_2" {
   description = "subnet cidr block"
-  default     = "10.0.20.0/24"
+  default     = "172.31.48.0/20"
 }
 
 variable "environment" {
