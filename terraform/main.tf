@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_vpc" "development-vpc" {
-  cidr_block = var.vpc_cidr_block
+  cidr_block = var.cidr_blocks[0]
   tags = {
     Name = var.environment
   }
@@ -13,7 +13,7 @@ resource "aws_vpc" "development-vpc" {
 
 resource "aws_subnet" "dev-subnet-1" {
   vpc_id            = aws_vpc.development-vpc.id
-  cidr_block        = var.subnet_cidr_block_dev_1
+  cidr_block        = var.cidr_blocks[1]
   availability_zone = "us-west-1b"
   tags = {
     Name = "subnet-1-dev"
@@ -26,7 +26,7 @@ data "aws_vpc" "exisiting_vpc" {
 
 resource "aws_subnet" "dev-subnet-2" {
   vpc_id            = data.aws_vpc.exisiting_vpc.id
-  cidr_block        = var.subnet_cidr_block_dev_2
+  cidr_block        = var.cidr_blocks[2]
   availability_zone = "us-west-1c"
   tags = {
     Name = "subnet-2-default"
