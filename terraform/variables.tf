@@ -8,6 +8,10 @@ variable "secret_key" {
   description = "Secret Key for AWS account"
 }
 
+variable "my_ip" {
+  description = "my ip address"
+}
+
 variable "vpc_cidr_blocks" {
   description = "cidr blocks for vpc and subnets"
   default     = "10.0.0.0/16"
