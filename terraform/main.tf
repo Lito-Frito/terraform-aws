@@ -82,6 +82,11 @@ data "aws_ami" "latest-amazon-linux-img" {
   }
 }
 
+resource "aws_key_pair" "ssh-key" {
+  key_name   = "server-key"
+  public_key = var.public_key
+}
+
 resource "aws_instance" "myapp-server" {
   # Required
   ami           = data.aws_ami.latest-amazon-linux-img.id
@@ -92,7 +97,7 @@ resource "aws_instance" "myapp-server" {
   vpc_security_group_ids      = [aws_default_security_group.default-sg.id]
   availability_zone           = var.avail_zone
   associate_public_ip_address = true
-  key_name                    = "server-key-pair"
+  key_name                    = aws_key_pair.ssh-key.key_name
 
   tags = {
     "Name" = "${var.env_prefix}-server"
