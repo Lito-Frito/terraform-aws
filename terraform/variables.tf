@@ -8,18 +8,31 @@ variable "secret_key" {
   description = "Secret Key for AWS account"
 }
 
-# variable "vpc_cidr_block" {
-#   description = "subnet cidr block"
-#   default     = "10.0.0.0/16"
-# }
-
-variable "cidr_blocks" {
-  description = "cidr blocks for vpc and subnets"
-  type        = list(string)
-  default     = ["10.0.0.0/16", "10.0.40.0/24", "172.31.48.0/20"]
+variable "my_ip" {
+  description = "my ip address"
 }
 
-variable "environment" {
+variable "vpc_cidr_blocks" {
+  description = "cidr blocks for vpc and subnets"
+  default     = "10.0.0.0/16"
+}
+
+variable "subnet_cidr_blocks" {
+  description = "cidr blocks for vpc and subnets"
+  default     = "10.0.10.0/24"
+}
+
+variable "avail_zone" {
+  description = "availibility zone for AWS"
+  default     = "us-west-1b"
+}
+
+variable "env_prefix" {
   description = "tag for deployment environment"
-  default     = "development"
+  default     = "dev"
+}
+
+variable "instance_type" {
+  description = "type for ec2 instance"
+  default     = "t2.micro"
 }
