@@ -5,7 +5,12 @@ variable "access_key" {
 
 variable "secret_key" {
   type        = string
-  description = "Secret Key for AWS account"
+  description = "secret Key for AWS account"
+}
+
+variable "public_key" {
+  type        = string
+  description = "public Key for AWS account"
 }
 
 variable "my_ip" {
