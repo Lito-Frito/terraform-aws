@@ -69,3 +69,17 @@ resource "aws_security_group" "myapp-sg" {
     "Name" = "${var.env_prefix}-sg"
   }
 }
+
+data "aws_ami" "latest-amazon-linux-img" {
+  most_recent = true
+  owners      = ["amazon"]
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-kernel*x86_64-gp2"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
