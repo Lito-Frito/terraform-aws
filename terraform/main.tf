@@ -39,8 +39,7 @@ resource "aws_default_route_table" "default-rtb" {
   }
 }
 
-resource "aws_security_group" "myapp-sg" {
-  name   = "myapp-sg"
+resource "aws_default_security_group" "default-sg" {
   vpc_id = aws_vpc.myapp-vpc.id
 
   ingress {
@@ -80,6 +79,23 @@ data "aws_ami" "latest-amazon-linux-img" {
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
+  }
+}
+
+resource "aws_instance" "myapp-server" {
+  # Required
+  ami           = data.aws_ami.latest-amazon-linux-img.id
+  instance_type = var.instance_type
+
+  # Optional
+  subnet_id                   = aws_subnet.myapp-subnet-1.id
+  vpc_security_group_ids      = [aws_default_security_group.default-sg.id]
+  availability_zone           = var.avail_zone
+  associate_public_ip_address = true
+  key_name                    = "server-key-pair"
+
+  tags = {
+    "Name" = "${var.env_prefix}-server"
   }
 }
 
