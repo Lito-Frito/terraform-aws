@@ -31,3 +31,8 @@ variable "env_prefix" {
   description = "tag for deployment environment"
   default     = "dev"
 }
+
+variable "instance_type" {
+  description = "type for ec2 instance"
+  default     = "t2.micro"
+}
