@@ -104,7 +104,7 @@ resource "aws_instance" "myapp-server" {
   key_name                    = aws_key_pair.ssh-key.key_name
 
   # Commands to execute
-user_data = file("entry-script.sh")
+  user_data = file("entry-script.sh")
 
   tags = {
     "Name" = "${var.env_prefix}-server"
