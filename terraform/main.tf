@@ -103,11 +103,15 @@ resource "aws_instance" "myapp-server" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ssh-key.key_name
 
-  # Commands to execute
-  user_data = file("entry-script.sh")
-
   tags = {
     "Name" = "${var.env_prefix}-server"
   }
+
+  # Ensure that EC2 is replaced when script is updated
+  user_data_replace_on_change = true
+
+  # Script to execute
+  user_data = file("entry-script.sh")
+
 }
 
