@@ -124,5 +124,11 @@ resource "aws_instance" "myapp-server" {
     source      = "entry-script.sh"
     destination = "/home/ec2-user/entry-script-on-ec2.sh"
   }
+
+  provisioner "remote-exec" {
+    script = file("entry-script-on-ec2.sh")
+  }
+
+  
 }
 
