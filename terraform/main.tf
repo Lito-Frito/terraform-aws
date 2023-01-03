@@ -88,7 +88,7 @@ output "ec2_public_ip" {
 
 resource "aws_key_pair" "ssh-key" {
   key_name   = "server-key"
-  public_key = var.public_key
+  public_key = file(var.public_key_location)
 }
 
 resource "aws_instance" "myapp-server" {
@@ -108,7 +108,21 @@ resource "aws_instance" "myapp-server" {
   }
 
   # Ensure that EC2 is replaced when script is updated
-  user_data_replace_on_change = true
+  # user_data_replace_on_change = true
+
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ec2-user"
+    private_key = file(var.private_key_location)
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "export ENV=dev",
+      "mkdir newdir",
+    ]
+  }
 
   # Script to execute
   user_data = file("entry-script.sh")
