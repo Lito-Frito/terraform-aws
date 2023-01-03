@@ -8,9 +8,14 @@ variable "secret_key" {
   description = "secret Key for AWS account"
 }
 
-variable "public_key" {
+variable "public_key_location" {
   type        = string
-  description = "public Key for AWS account"
+  description = "location for public key for AWS account"
+}
+
+variable "private_key_location" {
+  type        = string
+  description = "private key location for ssh"
 }
 
 variable "my_ip" {
