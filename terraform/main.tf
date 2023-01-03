@@ -129,6 +129,8 @@ resource "aws_instance" "myapp-server" {
     script = file("entry-script-on-ec2.sh")
   }
 
-  
+  provisioner "local-exec" {
+    command = "echo ${self.public_ip} > output.txt"
+  }
 }
 
