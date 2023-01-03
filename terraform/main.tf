@@ -110,6 +110,9 @@ resource "aws_instance" "myapp-server" {
   # Ensure that EC2 is replaced when script is updated
   # user_data_replace_on_change = true
 
+  # Script to execute
+  # user_data = file("entry-script.sh")
+
   connection {
     type        = "ssh"
     host        = self.public_ip
@@ -117,15 +120,9 @@ resource "aws_instance" "myapp-server" {
     private_key = file(var.private_key_location)
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "export ENV=dev",
-      "mkdir newdir",
-    ]
+  provisioner "file" {
+    source      = "entry-script.sh"
+    destination = "/home/ec2-user/entry-script-on-ec2.sh"
   }
-
-  # Script to execute
-  user_data = file("entry-script.sh")
-
 }
 
