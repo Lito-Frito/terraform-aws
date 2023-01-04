@@ -122,11 +122,14 @@ resource "aws_instance" "myapp-server" {
 
   provisioner "file" {
     source      = "entry-script.sh"
-    destination = "/home/ec2-user/entry-script-on-ec2.sh"
+    destination = var.entry_script_location
   }
 
   provisioner "remote-exec" {
-    script = file("entry-script-on-ec2.sh")
+    inline = [
+      "sudo chmod +x ${var.entry_script_location}",
+      "sudo sh ${var.entry_script_location}"
+    ]
   }
 
   provisioner "local-exec" {
