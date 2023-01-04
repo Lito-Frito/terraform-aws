@@ -46,3 +46,8 @@ variable "instance_type" {
   description = "type for ec2 instance"
   default     = "t2.micro"
 }
+
+variable "entry_script_location" {
+  description = "location of entry script for ec2 instance"
+  default     = "/home/ec2-user/entry-script-on-ec2.sh"
+}
