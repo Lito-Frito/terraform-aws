@@ -13,11 +13,11 @@ resource "aws_vpc" "myapp-vpc" {
 
 
 module "myapp-subnet" {
-  source = "./modules/subnet"
-  subnet_cidr_blocks = var.subnet_cidr_blocks
-  avail_zone = var.avail_zone
-  env_prefix = var.env_prefix
-  vpc_id = aws_vpc.myapp-vpc.id
+  source                 = "./modules/subnet"
+  subnet_cidr_blocks     = var.subnet_cidr_blocks
+  avail_zone             = var.avail_zone
+  env_prefix             = var.env_prefix
+  vpc_id                 = aws_vpc.myapp-vpc.id
   default_route_table_id = aws_vpc.myapp-vpc.default_route_table_id
 }
 resource "aws_default_security_group" "default-sg" {
@@ -74,7 +74,7 @@ resource "aws_instance" "myapp-server" {
   instance_type = var.instance_type
 
   # Optional
-  subnet_id                   = aws_subnet.myapp-subnet-1.id
+  subnet_id                   = module.myapp-subnet.subnet.id
   vpc_security_group_ids      = [aws_default_security_group.default-sg.id]
   availability_zone           = var.avail_zone
   associate_public_ip_address = true
