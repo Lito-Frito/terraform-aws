@@ -1,6 +1,6 @@
 resource "aws_security_group" "myapp-sg" {
   vpc_id = var.vpc_id
-  name = "myapp-sg"
+  name   = "myapp-sg"
 
   ingress {
     from_port   = 22
