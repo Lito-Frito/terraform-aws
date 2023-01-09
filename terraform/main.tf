@@ -1,3 +1,12 @@
+terraform {
+  required_version = ">= 0.12"
+  backend "s3" {
+    bucket = "myapp-bucket-nana"
+    key    = "myapp/state.tfstate"
+    region = "us-west-1"
+  }
+}
+
 provider "aws" {
   region     = "us-west-1"
   access_key = var.access_key
