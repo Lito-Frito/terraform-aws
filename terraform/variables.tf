@@ -8,9 +8,14 @@ variable "secret_key" {
   description = "secret Key for AWS account"
 }
 
-variable "public_key" {
+variable "public_key_location" {
   type        = string
-  description = "public Key for AWS account"
+  description = "location for public key for AWS account"
+}
+
+variable "private_key_location" {
+  type        = string
+  description = "private key location for ssh"
 }
 
 variable "my_ip" {
@@ -40,4 +45,14 @@ variable "env_prefix" {
 variable "instance_type" {
   description = "type for ec2 instance"
   default     = "t2.micro"
+}
+
+variable "entry_script_location" {
+  description = "location of entry script for ec2 instance"
+  default     = "/home/ec2-user/entry-script-on-ec2.sh"
+}
+
+variable "image_name" {
+  description = "name of image used for ec2 instaance"
+  default     = "amzn2-ami-kernel*x86_64-gp2"
 }

@@ -6,3 +6,6 @@
 
 # tf state files
 *.tfstate*
+
+# output files
+output.txt
