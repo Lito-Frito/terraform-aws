@@ -51,3 +51,8 @@ variable "entry_script_location" {
   description = "location of entry script for ec2 instance"
   default     = "/home/ec2-user/entry-script-on-ec2.sh"
 }
+
+variable "image_name" {
+  description = "name of image used for ec2 instaance"
+  default     = "amzn2-ami-kernel*x86_64-gp2"
+}
